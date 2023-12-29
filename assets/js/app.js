@@ -1,5 +1,19 @@
+import Modal from "./Modal.js";
 import GameLoader from "./GameLoader.js";
 
 (()=>{
-	new GameLoader(console.log, undefined, console.log);
+	let modals = new Modal;
+	new GameLoader(
+		e=>{
+			console.log('end loader', e);
+			modals['loading'].hide();
+		},
+		e=>{
+			console.log('start loader');
+			modals['loading'].show();
+		},
+		e=>{
+			console.log('loader item', e);
+		}
+	);
 })();
