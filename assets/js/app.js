@@ -2,7 +2,9 @@ import Modal from "./Modal.js";
 import GameLoader from "./GameLoader.js";
 
 (()=>{
+	
 	let modals = new Modal;
+
 	new GameLoader(
 		e=>{
 			console.log('end loader', e);

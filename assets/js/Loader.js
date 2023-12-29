@@ -11,6 +11,8 @@ export default function Loader(urls = [], loaded = new Function){
 
 	let self = {load, onstart, onload, loaded};
 
+	let is_start;
+
 	function load(_urls = urls, Model = Image, _loaded = loaded){
 
 		let length = Object.keys(_urls).length;
@@ -18,7 +20,10 @@ export default function Loader(urls = [], loaded = new Function){
 		let name = Model.name;
 		let id = name[0] + '_';
 
-		onstart(_urls, Model);
+		if(!is_start){
+			onstart(_urls, Model);
+			is_start = 1;
+		}
 
 		for(let i in _urls){
 			let url = _urls[i];
@@ -26,8 +31,10 @@ export default function Loader(urls = [], loaded = new Function){
 			if(typeof url == 'object'){
 				load(url, window[i], function(items){
 					Object.assign(result, items);
-					if(--length == 0)
+					if(--length == 0){
+						is_start = 0;
 						loaded(result, self)
+					}
 				});
 
 				continue;
