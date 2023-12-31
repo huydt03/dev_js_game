@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" 
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<title>Loader</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/app.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/Modal.css">
 </head>
 <body>
@@ -10,6 +14,34 @@
 		<span class="loader"></span>
 	</div>
 
-	<script type="module" src="./assets/js/app.js"></script>
+	<header class="text">
+		<div>Level: <label id="level">1</label></div>
+		<div>Time: <label id="time">1:00</label></div>
+		<div>Score: <label id="score">0</label></div>
+	</header>
+
+    <div id="game-options" class="center">
+		<div class="o-height">
+			<div>BEST SCORE</div>
+			<div class="flex text">
+				<div>Level: <label id="h_level">1</label></div>
+				<div>Score: <label id="h_score">0</label></div>
+			</div>
+		</div>
+		<label id="play" class="o-item">Play</label>
+		<label id="options" class="o-item">
+			<div class="flex o-options">
+				<div id="o-sound"><div>Sound</div><div>♫</div></div>
+				<div id="o-effect"><div>Effect</div><div>♪</div></div>
+			</div>
+		</label>
+	</div>
+
+	<div id="game"></div>
+
 </body>
+
+	<script type="module" src="./assets/js/konva.min.js"></script>
+	<script type="module" src="./assets/js/app.js"></script>
+
 </html>

@@ -1,13 +1,16 @@
 import Modal from "./Modal.js";
 import GameLoader from "./GameLoader.js";
+import Game from "./Game.js";
+	
 
-(()=>{
+window.onload = ()=>{
 	
 	let modals = new Modal;
 
 	new GameLoader(
-		e=>{
-			console.log('end loader', e);
+		(nodes)=>{
+			console.log('end loader');
+			new Game(nodes);
 			modals['loading'].hide();
 		},
 		e=>{
@@ -18,4 +21,5 @@ import GameLoader from "./GameLoader.js";
 			console.log('loader item', e);
 		}
 	);
-})();
+
+};
