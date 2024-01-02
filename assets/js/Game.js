@@ -1,6 +1,30 @@
 import Mosquito from "./Mosquito.js";
 import KonvaImage from "./KonvaImage.js";
 
+function anmText(layer, x, y, text = '-5s', color = 'red'){
+		let _text = new Konva.Text({
+		    x,
+		    y,
+		    text,
+		    fontSize: 30,
+		    fontStyle: 'bold',
+		    fontFamily: 'Calibri',
+		    fill: color,
+		});
+
+		layer.add(_text);
+
+		new Konva.Tween({
+	        node: _text,
+	        y: y - 44,
+	        duration: .4,
+	      }).play();
+
+		setTimeout(function(){
+			_text.destroy();
+		}, 400);
+}
+
 export default function Game(nodes){
 
 	nodes['A_0'].loop = 1;
@@ -43,9 +67,17 @@ export default function Game(nodes){
 	});
 
 	stage.on(e_click, e=>{
+
+		if(!app.getStatus()) return;
+
 		if(effect)
 			nodes['A_1'].play();
 		app.take();
+
+		let {clientX, clientY} = e.evt;
+
+		new anmText(layer, clientX - 15, clientY - 15);
+
 	});
 
 	var layer = new Konva.Layer();
@@ -69,9 +101,22 @@ export default function Game(nodes){
 	window.addEventListener('resize', stageResize);
 
 	function mosquitoHandle(e, id){
-		let {position} = e;
+		let {position, deg} = e;
 		let mosquito = mosquitos[id];
 		if(mosquito){
+
+			let _deg = (deg)%55;
+
+			if(deg > -90 && deg < 90 && !mosquito.scaled){
+				mosquito.scaled = 1;
+				mosquito.scaleX(-1)
+			}else if((deg < -90 || deg > 90) && mosquito.scaled){
+				mosquito.scaled = 0;
+				mosquito.scaleX(1);
+			}
+
+			mosquito.rotation(mosquito.scaled? _deg: -_deg);
+
 			new Konva.Tween({
 		        node: mosquito,
 		        x: position[0],
@@ -79,7 +124,7 @@ export default function Game(nodes){
 		        duration: .2,
 		      }).play();
 
-			let index = Math.round(Math.random()*count + 1);
+			let index = Math.round(Math.random()*count)+ 1;
 			mosquito.zIndex(index);
 
 		}
@@ -109,8 +154,8 @@ export default function Game(nodes){
 		          height: size[1],
 			      image: nodes['I_3']
 			});
-	    	_image.cache();
-			_image.drawHitFromCache();
+	  //   	_image.cache();
+			// _image.drawHitFromCache();
 	        layer.add(_image);
 	        _image.on(e_click, function(){
 	        	if(!app.getStatus())
@@ -122,6 +167,10 @@ export default function Game(nodes){
 
 				if(effect)
 					nodes['A_2'].play();
+
+				let {x, y, width, height} = _image.attrs;
+
+				new anmText(layer, x + width/2, y, '+1', 'yellow');
 	        })
 	        mosquitos[i] = _image;
 		}

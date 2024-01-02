@@ -1,12 +1,14 @@
-export default function KonvaImage(layer, images = []){
+export default function KonvaImage(layer, images = [], is_png = true){
 
     let nodes = [];
 
     function draw(image){
     	let {x, y, width, height, zIndex, node} = image;
     	let _image = new Konva.Image({x, y, width, height, image: node});
-    	_image.cache();
-		_image.drawHitFromCache();
+        if(is_png){
+            _image.cache();
+            _image.drawHitFromCache();
+        }
     	layer.add(_image);
         _image.zIndex(zIndex);
 

@@ -3,7 +3,7 @@ function angle(cx, cy, ex, ey) {
   var dx = ex - cx;
   var theta = Math.atan2(dy, dx); // range (-PI, PI]
   theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
-  // if (theta < 0) theta = 360 + theta; // range [0, 360)
+  // if (theta < 0) theta = (360 + theta); // range [0, 360)
   return theta;
 }
 
@@ -109,7 +109,7 @@ export default function Mosquito(
 
 	const OPTIONS = {
 		MAX_LEVEL: 666,
-		LEVEL: 33,
+		LEVEL: 1,
 		SIZE: 55,
 		SCORE: 0,
 		TIME: 30,
