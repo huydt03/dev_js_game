@@ -194,6 +194,7 @@ export default function Game(nodes){
 	function endHandle(e){
 		nodes['A_0'].pause();
 		e_options.style.display = 'flex';
+		let {level, score} = e;
 		setHeight(level, score);
 	}
 
@@ -261,6 +262,18 @@ function drawBg(layer, nodes, width, height){
 		zIndex: 2
 	}
 
+	let co_nho = {
+		node: nodes['I_5'],
+		height: height * .22,
+		zIndex: 3
+	}
+
+	let da = {
+		node: nodes['I_6'],
+		height: height * .22,
+		zIndex: 4
+	}
+
 	return new KonvaImage(layer, [
 		{
 			...nuoc,
@@ -276,6 +289,16 @@ function drawBg(layer, nodes, width, height){
 			...co,
 			x: -20,
         	y: height - co.height + 5,
+		},
+		{
+			...co_nho,
+			x: 20,
+        	y: height - nuoc.height,
+		},
+		{
+			...da,
+			x: 20,
+        	y: height - nuoc.height,
 		}
 	]).draws();
 

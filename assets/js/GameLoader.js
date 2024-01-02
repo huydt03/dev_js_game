@@ -12,7 +12,7 @@ export default function GameLoader(loaded = new Function, onstart = new Function
 
 	const AUDIOS_DIR = 'audios/';
 
-	const IMAGES = ['nuoc', 'co', 'dua', 'mosquito', 'x-icon'];
+	const IMAGES = ['nuoc', 'co', 'dua', 'mosquito2', 'x-icon', 'co-nho', 'da'];
 
 	const AUDIOS = ['bg', '0.1', '1.1'];
 
